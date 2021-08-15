@@ -1,13 +1,18 @@
 <template>
   <div class="toDo-List__items">
-    <div class="toDo-list__item" v-for="(task,prop) in toDoList" :key="prop">
-      <label :for= task.id >
-        <input type="checkbox" :id= task.id checked v-if="task.status === 'done'">
-        <input type="checkbox" :id= task.id v-else >
-        <span class="toDo-item__status"></span>
-      </label>
-      <p>{{task.text}}</p>
-      <button class="toDo-item__btn"><span>X</span></button>
+    <template v-if="!isEmpty">
+      <div class="toDo-list__item" v-for="(task,prop) in toDoList" :key="prop">
+        <label :for= task.id >
+          <input type="checkbox" :id= task.id checked v-if="task.status === 'done'" @change="changeStatus(task.id)">
+          <input type="checkbox" :id= task.id v-else @change="changeStatus(task.id)">
+          <span class="toDo-item__status"></span>
+        </label>
+        <p>{{task.text}}</p>
+        <button class="toDo-item__btn" @click="deleteItem(task.id)"><span>X</span></button>
+      </div>
+    </template>
+    <div v-else class="toDo-list__empty">
+      <h2 >добавьте задачи к выполнению!!!</h2>
     </div>
   </div>
 </template>
@@ -20,7 +25,20 @@
         type: Object,
         default: () => ({})
       }
+    },
+   computed: {
+    isEmpty() {
+      return !Object.keys(this.toDoList).length;
     }
+   },
+   methods:{
+      deleteItem(id){
+       this.$emit("deleteItem",id);
+     },
+     changeStatus(id){
+       this.$emit("changeStatus",id);
+     }
+   }
   }
 </script>
 
@@ -102,6 +120,25 @@
         opacity: 1;
       }
     }
+  }
+
+  .toDo-list__empty{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 30rem;
+    height: 3.1rem;
+    margin: 0 auto 0.5rem auto;
+    text-align: center;
+    font-family: $ff-task;
+    color: $color-text;
+    background: #FFDFBE;
+
+    & h2{
+      margin: 0 0 0 1rem;
+    }
+
   }
 
 </style>

@@ -1,12 +1,23 @@
 <template>
   <div class="toDoList__newTask">
-      <input type="text" id="addTask" placeholder="Add a new task">
+      <input type="text" placeholder="Add a new task" v-model = "task_value.value" @keypress.enter="addNewTask" required>
   </div>
 </template>
 
 <script>
   export default {
-    name: "toDolistNewTask"
+    name: "toDolistNewTask",
+    data: () => ({
+     task_value: {
+       value : ''
+     },
+    }),
+    methods: {
+      addNewTask(){
+        this.$emit("addNewTask", this.task_value.value);
+        this.task_value.value = '';
+      }
+    }
   }
 </script>
 

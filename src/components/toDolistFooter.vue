@@ -1,25 +1,25 @@
 <template>
   <div class="toDo-list__footer">
     <div class="toDoList__info">
-      <p>1/3 left</p>
+      <p> {{tasks.active}}/{{tasks.count}} left</p>
     </div>
     <div class="toDoList__filter">
 
       <label for="filterChoice1" class="toDoList-filter__option">
         <input type="radio" id="filterChoice1"
-               name="filter" value="all" checked>
+               name="filter" value="all" @change="selectOption" v-model = 'status' checked>
         <span>All</span>
       </label>
 
       <label for="filterChoice2" class="toDoList-filter__option">
         <input type="radio" id="filterChoice2"
-               name="filter" value="active">
+               name="filter" value="active" @change="selectOption" v-model = 'status'>
         <span>Active</span>
       </label>
 
       <label for="filterChoice3" class="toDoList-filter__option">
         <input type="radio" id="filterChoice3"
-               name="filter" value="completed">
+               name="filter" value="completed" @change="selectOption" v-model = 'status'>
         <span>Completed</span>
       </label>
     </div>
@@ -28,8 +28,23 @@
 
 <script>
   export default {
-    name: "toDolistFooter"
+    name: "toDolistFooter",
+    props : {
+      tasks: {
+        type: Object,
+        default: () => ({})
+      },
+    },
+    data : () => ({
+      status : 'all'
+    }),
+    methods:{
+      selectOption(){
+        this.$emit("selectOption", this.status);
+      }
+    }
   }
+
 </script>
 
 <style lang="scss" scoped>
