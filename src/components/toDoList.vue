@@ -1,31 +1,28 @@
 <template>
-  <div class="todoList-container">
+  <div :class="$style.container">
     <img src="@/assets/img/bg-note.png">
-    <div class="todoList__title">
+    <div :class="$style.title">
       <h2> to do list</h2>
     </div>
-    <div class="todoList__block">
-      <toDolistItem :toDoList="taskFilter" @deleteItem="onDeleteItem" @changeStatus="onChangeStatus"/>
-      <toDolistNewTask @addNewTask="onAddNewTask"/>
+    <div :class="$style.block">
+      <ToDolistItem :toDoList="taskFilter" @deleteItem="onDeleteItem" @changeStatus="onChangeStatus"/>
+      <ToDolistNewTask @addNewTask="onAddNewTask"/>
     </div>
-    <div class="todoList__footer">
-      <toDolistFooter :tasks="taskInfo" @selectOption="onSelectOptions"/>
-    </div>
-
+    <ToDolistFooter :tasks="taskInfo" @selectOption="onSelectOptions"/>
   </div>
 </template>
 
 <script>
-  import toDolistItem from "./toDolistItem";
-  import toDolistNewTask from "./toDolistNewTask";
-  import toDolistFooter from "./toDolistFooter";
+  import ToDolistItem from "./toDolistItem";
+  import ToDolistNewTask from "./toDolistNewTask";
+  import ToDolistFooter from "./toDolistFooter";
 
   export default {
-    name: "todoList-container",
+    name: "TodoList-container",
     components: {
-      toDolistItem,
-      toDolistNewTask,
-      toDolistFooter,
+      ToDolistItem,
+      ToDolistNewTask,
+      ToDolistFooter,
     },
     methods: {
       onDeleteItem(id) {
@@ -85,10 +82,10 @@
         }
       },
       taskFilter() {
-        let filter_status = this.filter_status;
+        let filterStatus = this.filter_status;
         let newObj = {};
 
-        if (filter_status === 'all') {
+        if (filterStatus === 'all') {
           newObj = this.todoList;
         }
 
@@ -97,13 +94,12 @@
           let tempTask = this.todoList[prop];
           let task_count = Object.keys(newObj).length;
 
-          switch (filter_status) {
+          switch (filterStatus) {
 
             case "active":
               if (tempTask.status === 'active') {
                 newObj[task_count + 1] = tempTask;
               }
-              console.log(newObj)
               break;
 
             case "completed":
@@ -112,22 +108,17 @@
               }
               break;
           }
-
         }
-       // console.log(newObj)
         return newObj;
       },
     }
-
   }
 
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss" module>
   @import 'src/assets/styles/vars.scss';
-
-  .todoList-container {
+  .container {
     max-width: 35rem;
     height: auto;
     margin: 0 auto;
@@ -146,9 +137,9 @@
       z-index: -1;
     }
 
-    .todoList__title {
+    .title {
       width: 35rem;
-      height: 3.1rem;
+      min-height: 3.1rem;
       text-align: center;
       background: $color_bg_brown;
 
@@ -156,13 +147,18 @@
         color: $color-text;
         font-size: 1.2rem;
         font-weight: 600;
-        Line-height: 3.5rem;
+        margin: 0;
+        padding: 0.7rem 0;
       }
     }
 
-    .todoList__block {
+    .block {
       padding: 2rem 0.5rem 2rem 0.5rem;
       background: $color_white;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 

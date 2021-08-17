@@ -1,69 +1,67 @@
 <template>
-  <div class="toDo-List__items">
+  <div>
     <template v-if="!isEmpty">
-      <div class="toDo-list__item" v-for="(task,prop) in toDoList" :key="prop">
-        <label :for= task.id >
-          <input type="checkbox" :id= task.id checked v-if="task.status === 'done'" @change="changeStatus(task.id)">
-          <input type="checkbox" :id= task.id v-else @change="changeStatus(task.id)">
-          <span class="toDo-item__status"></span>
+      <div :class="$style.listItem" v-for="(task) in toDoList" :key="task.id">
+        <label >
+          <input type="checkbox" checked v-if="task.status === 'done'" @change="changeStatus(task.id)">
+          <input type="checkbox" v-else @change="changeStatus(task.id)">
+          <span :class="$style.itemStatus"></span>
         </label>
         <p>{{task.text}}</p>
-        <button class="toDo-item__btn" @click="deleteItem(task.id)"><span>X</span></button>
+        <button :class="$style.btn" @click="deleteItem(task.id)"></button>
       </div>
     </template>
-    <div v-else class="toDo-list__empty">
-      <h2 >добавьте задачи к выполнению!!!</h2>
+    <div v-else :class="$style.listEmpty">
+      <h2>добавьте задачи к выполнению!!!</h2>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "toDolistItem",
+    name: "ToDolistItem",
     props: {
-      toDoList : {
+      toDoList: {
         type: Object,
         default: () => ({})
       }
     },
-   computed: {
-    isEmpty() {
-      return !Object.keys(this.toDoList).length;
+    computed: {
+      isEmpty() {
+        return !Object.keys(this.toDoList).length;
+      }
+    },
+    methods: {
+      deleteItem(id) {
+        this.$emit("deleteItem", id);
+      },
+      changeStatus(id) {
+        this.$emit("changeStatus", id);
+      }
     }
-   },
-   methods:{
-      deleteItem(id){
-       this.$emit("deleteItem",id);
-     },
-     changeStatus(id){
-       this.$emit("changeStatus",id);
-     }
-   }
   }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss" module>
   @import 'src/assets/styles/vars.scss';
 
-  .toDo-list__item{
-
+  .listItem {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     max-width: 30rem;
-    height: 3.1rem;
+    min-height: 3.1rem;
     margin: 0 auto 0.5rem auto;
     text-align: center;
     font-family: $ff-task;
     background: #FFDFBE;
 
-    & input{
+    & input {
       display: none;
     }
 
-    .toDo-item__status{
+    .itemStatus {
       display: block;
       margin-left: 0.5rem;
       width: 1.5rem;
@@ -73,11 +71,11 @@
       cursor: pointer;
     }
 
-    & label input:checked + span{
+    & label input:checked + span {
       background: #FEB567;
       position: relative;
 
-      &:before{
+      &:before {
         content: '\2713';
         display: block;
         position: absolute;
@@ -88,7 +86,7 @@
       }
     }
 
-    & p{
+    & p {
       text-align: left;
       flex: auto;
       margin-left: 1rem;
@@ -97,7 +95,8 @@
       color: $color-text;
     }
 
-    .toDo-item__btn{
+    .btn {
+      position: relative;
       width: 1.5rem;
       height: 1.5rem;
       margin-right: 0.5rem;
@@ -106,23 +105,31 @@
       border: 1px solid $color_bg_brown;
       opacity: 0.8;
       cursor: pointer;
-      & span{
-        opacity: 0.3;
-        font-weight: 600;
-      }
     }
 
-    .toDo-item__btn:hover{
+    .btn:before {
+      content: '\2715';
+      position: absolute;
+      top: 0;
+      left: 5px;
+      font-size: 16px;
+      color: $color-text;
+      opacity: 0.7;
+    }
+
+    .btn:hover {
       opacity: 1;
-      color: #FC8F1A;
-      border: 1px solid #FC8F1A;
-      & span{
-        opacity: 1;
-      }
+      color: $color-hover-text;
+      border: 1px solid $color-hover-text;
+    }
+
+    .btn:hover:before {
+      color: $color-hover-text;
+      opacity: 1;
     }
   }
 
-  .toDo-list__empty{
+  .listEmpty {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -135,10 +142,9 @@
     color: $color-text;
     background: #FFDFBE;
 
-    & h2{
+    & h2 {
       margin: 0 0 0 1rem;
     }
-
   }
 
 </style>

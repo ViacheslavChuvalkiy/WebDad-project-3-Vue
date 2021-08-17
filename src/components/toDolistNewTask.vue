@@ -1,19 +1,19 @@
 <template>
-  <div class="toDoList__newTask">
-      <input type="text" placeholder="Add a new task" v-model = "task_value.value" @keypress.enter="addNewTask" required>
+  <div :class="$style.newTask">
+    <input type="text" placeholder="Add a new task" v-model="task_value.value" @keypress.enter="addNewTask" required>
   </div>
 </template>
 
 <script>
   export default {
-    name: "toDolistNewTask",
+    name: "ToDolistNewTask",
     data: () => ({
-     task_value: {
-       value : ''
-     },
+      task_value: {
+        value: ''
+      },
     }),
     methods: {
-      addNewTask(){
+      addNewTask() {
         this.$emit("addNewTask", this.task_value.value);
         this.task_value.value = '';
       }
@@ -21,14 +21,13 @@
   }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss" module>
   @import 'src/assets/styles/vars.scss';
 
-  .toDoList__newTask {
+  .newTask {
     max-width: 30rem;
-    height: 3.1rem;
-    margin: 1.5rem auto 0 auto;
+    min-height: 3.1rem;
+    margin: 0 auto 0;
     text-align: center;
     background: $color_bg_light_brown;
     border-radius: 3px;
@@ -36,7 +35,7 @@
 
     & input {
       width: 99%;
-      height: 3.1rem;
+      min-height: 3.1rem;
       font-size: 1.5rem;
       color: $color_text;
       border: none;

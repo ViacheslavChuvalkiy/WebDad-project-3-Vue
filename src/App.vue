@@ -1,22 +1,18 @@
 <template>
   <div id="app">
-    <toDolist />
+    <ToDolist/>
   </div>
 </template>
 
 
 <script>
 
-  import toDolist from "./components/toDoList.vue";
+  import ToDolist from "./components/toDoList.vue";
 
   export default {
-    name: 'main',
     components: {
-      toDolist,
+      ToDolist,
     },
-
-    data: () => {
-    }
 
   }
 </script>
@@ -27,13 +23,13 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@600&display=swap');
   @import 'src/assets/styles/vars.scss';
 
-  body{
+  body {
     margin: 0;
     padding: 0;
     user-select: none;
   }
 
-  #app{
+  #app {
     width: 100vw;
     height: 100vh;
     background: linear-gradient(to right, #FF7E5F, #FEB567);
