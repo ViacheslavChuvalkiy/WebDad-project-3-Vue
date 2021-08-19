@@ -3,17 +3,16 @@
     <div :class="$style.info">
       <p>{{tasks.active}}/{{tasks.count}} left</p>
     </div>
-    <ToDoFilter @selectOption="onSelectFilter"/>
+    <ToDoFilterBlock @selectOption="onSelectFilter"/>
   </div>
 </template>
 
 <script>
-  import ToDoFilter from "./toDoFilter";
+  import ToDoFilterBlock from "./ToDoFilterBlock";
 
   export default {
-    name: "ToDolistFooter",
     components: {
-      ToDoFilter
+      ToDoFilterBlock
     },
     props: {
       tasks: {
@@ -36,8 +35,9 @@
   .footer {
     display: flex;
     justify-content: space-between;
-    width: 35rem;
+    max-width: 35rem;
     min-height: 3.1rem;
+    padding: 0 2rem;
     font-size: 1.2rem;
     background: $color_bg_brown;
     color: $color-text;
@@ -45,13 +45,19 @@
     .info {
       display: flex;
       align-self: center;
-      padding: 0.1rem 1rem;
 
       & p {
         padding: 0;
         margin: 0;
         opacity: 0.42;
       }
+    }
+  }
+
+  @media (max-width: 450px) {
+    .footer {
+        max-width: 25rem;
+        padding: 0 0.5rem;
     }
   }
 

@@ -2,11 +2,7 @@
   <div>
     <template v-if="!isEmpty">
       <div :class="$style.listItem" v-for="(task) in toDoList" :key="task.id">
-        <label >
-          <input type="checkbox" checked v-if="task.status === 'done'" @change="changeStatus(task.id)">
-          <input type="checkbox" v-else @change="changeStatus(task.id)">
-          <span :class="$style.itemStatus"></span>
-        </label>
+        <ToDoTask :ToDoTask = "task" />
         <p>{{task.text}}</p>
         <button :class="$style.btn" @click="deleteItem(task.id)"></button>
       </div>
@@ -18,13 +14,16 @@
 </template>
 
 <script>
+  import ToDoTask from "./ToDoTask";
   export default {
-    name: "ToDolistItem",
     props: {
       toDoList: {
         type: Object,
         default: () => ({})
       }
+    },
+    components: {
+      ToDoTask,
     },
     computed: {
       isEmpty() {
@@ -34,9 +33,6 @@
     methods: {
       deleteItem(id) {
         this.$emit("deleteItem", id);
-      },
-      changeStatus(id) {
-        this.$emit("changeStatus", id);
       }
     }
   }
@@ -50,46 +46,19 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    max-width: 30rem;
+    min-width: 30rem;
     min-height: 3.1rem;
-    margin: 0 auto 0.5rem auto;
+    margin: 0 2rem 2rem 2rem;
     text-align: center;
+    border-radius: 10px;
     font-family: $ff-task;
     background: #FFDFBE;
-
-    & input {
-      display: none;
-    }
-
-    .itemStatus {
-      display: block;
-      margin-left: 0.5rem;
-      width: 1.5rem;
-      height: 1.5rem;
-      background: transparent;
-      border: 1px solid $color_bg_brown;
-      cursor: pointer;
-    }
-
-    & label input:checked + span {
-      background: #FEB567;
-      position: relative;
-
-      &:before {
-        content: '\2713';
-        display: block;
-        position: absolute;
-        font-size: 1.15rem;
-        top: -5%;
-        left: 26%;
-        color: $color_white;
-      }
-    }
 
     & p {
       text-align: left;
       flex: auto;
-      margin-left: 1rem;
+      word-break: break-all;
+      margin: 0.3rem 1rem;
       font-weight: 400;
       font-size: 1.2rem;
       color: $color-text;
@@ -97,9 +66,9 @@
 
     .btn {
       position: relative;
-      width: 1.5rem;
-      height: 1.5rem;
-      margin-right: 0.5rem;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin-right: 1rem;
       background: transparent;
       color: $color-text;
       border: 1px solid $color_bg_brown;
@@ -109,10 +78,9 @@
 
     .btn:before {
       content: '\2715';
-      position: absolute;
       top: 0;
-      left: 5px;
-      font-size: 16px;
+      left: 0.3rem;
+      font-size: 1rem;
       color: $color-text;
       opacity: 0.7;
     }
@@ -135,7 +103,7 @@
     justify-content: space-between;
     align-items: center;
     max-width: 30rem;
-    height: 3.1rem;
+    min-height: 3.1rem;
     margin: 0 auto 0.5rem auto;
     text-align: center;
     font-family: $ff-task;
@@ -144,6 +112,40 @@
 
     & h2 {
       margin: 0 0 0 1rem;
+    }
+  }
+
+  @media (max-width: 930px) {
+    .listItem, .listEmpty{
+      min-width: 25rem;
+      min-height: 2.5rem;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .listItem, .listEmpty{
+      min-width: 20rem;
+    }
+  }
+
+  @media (max-width: 660px) {
+
+    .listItem{
+      & .btn {
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+
+      & .btn:before {
+        font-size: 0.8rem;
+      }
+    }
+
+  }
+
+  @media (max-width: 500px) {
+    .listItem, .listEmpty{
+      min-width: 18rem;
     }
   }
 

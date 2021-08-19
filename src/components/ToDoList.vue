@@ -13,12 +13,11 @@
 </template>
 
 <script>
-  import ToDolistItem from "./toDolistItem";
-  import ToDolistNewTask from "./toDolistNewTask";
-  import ToDolistFooter from "./toDolistFooter";
+  import ToDolistItem from "./ToDolistItem";
+  import ToDolistNewTask from "./ToDolistNewTask";
+  import ToDolistFooter from "./ToDolistFooter";
 
   export default {
-    name: "TodoList-container",
     components: {
       ToDolistItem,
       ToDolistNewTask,
@@ -26,29 +25,24 @@
     },
     methods: {
       onDeleteItem(id) {
-
         this.$delete(this.todoList, id);
       },
       onChangeStatus(id) {
         this.todoList[id].status = this.todoList[id].status === "done" ? "active" : "done";
       },
       onAddNewTask(value) {
-
         let lastId = Number(Object.keys(this.todoList)[Object.keys(this.todoList).length - 1]);
 
         if (!lastId) {
           lastId = 0;
         }
-
         const newTask = {
           text: value,
           status: 'active',
           id: String(lastId + 1)
         };
 
-
         this.$set(this.todoList, newTask.id, newTask);
-
       },
       onSelectOptions(value) {
         this.filter_status = value;
@@ -113,7 +107,6 @@
       },
     }
   }
-
 </script>
 
 <style lang="scss" module>
@@ -131,14 +124,14 @@
       position: absolute;
       width: 30rem;
       height: 40rem;
-      top: -1rem;
+      top: 1rem;
       left: 50%;
       opacity: 0.8;
       z-index: -1;
     }
 
     .title {
-      width: 35rem;
+      max-width: 35rem;
       min-height: 3.1rem;
       text-align: center;
       background: $color_bg_brown;
@@ -153,13 +146,72 @@
     }
 
     .block {
-      padding: 2rem 0.5rem 2rem 0.5rem;
+      padding: 2rem 0;
       background: $color_white;
 
-      &:last-child {
+      & div :last-child {
         margin-bottom: 0;
       }
     }
   }
+
+  @media (max-width: 1010px) {
+    .container {
+      & img {
+        width: 25rem;
+        height: 35rem;
+      }
+    }
+  }
+
+  @media (max-width: 820px) {
+    .container {
+      & img {
+        width: 20rem;
+        height: 33rem;
+      }
+    }
+  }
+
+  @media (max-width: 660px) {
+    .container {
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 4rem 0.5rem;
+      & img {
+        left: 43%;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      margin: 0 2rem 0 4rem;
+      & img {
+        left: 40%;
+      }
+    }
+  }
+
+  @media (max-width: 580px) {
+    .container {
+      margin: 0 auto;
+      & img {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    .container {
+      max-width: 21rem;
+      .title {
+        max-width: 21rem;
+        padding: 0;
+      }
+
+    }
+  }
+
 
 </style>
