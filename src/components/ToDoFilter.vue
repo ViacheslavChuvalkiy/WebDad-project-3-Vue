@@ -4,8 +4,8 @@
             type="radio"
             name="filter"
             :value="filter.value"
-            v-model="status"
             :checked="filter.isChecked"
+            @change="changeFilter(filter.id)"
     >
     <span>{{filter.text}}</span>
   </label>
@@ -13,23 +13,29 @@
 
 <script>
 
+  import {mapActions} from "vuex";
+
   export default {
-    data: () => ({
-     status : 'all',
-    }),
     props: {
       filter: {
         type: Object,
         default: () => ({})
       },
     },
+    methods: {
+      ...mapActions('filter', ['changeFilter', 'changeActiveFilter']),
+      changeFilter(id) {
+        this.changeFilter(id);
+        this.changeActiveFilter(id);
+      }
+    }
   }
 </script>
 
 <style lang="scss" module>
 
     .filterOption {
-      padding: 0.1rem 0.5rem;
+      padding: 0.1rem 0 0.1rem 0.5rem;
       margin: 0 0 0.2rem 0;
 
       & span {

@@ -3,23 +3,25 @@
     <input
             type="text"
             placeholder="Add a new task"
-            v-model="task_value.value"
-            @keypress.enter="addNewTask"
+            v-model="value"
+            @keypress.enter="addTask"
     >
   </div>
 </template>
 
 <script>
+
+  import {mapActions} from 'vuex'
+
   export default {
     data: () => ({
-      task_value: {
         value: ''
-      },
     }),
     methods: {
-      addNewTask() {
-        this.$emit("addNewTask", this.task_value.value);
-        this.task_value.value = '';
+      ...mapActions('tasks', ['addNewTask']),
+      addTask() {
+        this.addNewTask(this.value);
+        this.value = '';
       }
     }
   }
@@ -29,8 +31,7 @@
   @import 'src/assets/styles/vars.scss';
 
   .newTask {
-    max-width: 30rem;
-    min-height: 3.1rem;
+    min-height: 2.6rem;
     margin: 2rem 2rem 0 2rem;
     text-align: center;
     background: $color_bg_light_brown;
@@ -39,7 +40,7 @@
 
     & input {
       width: 99%;
-      min-height: 3.1rem;
+      min-height: 2.6rem;
       margin: 0;
       font-size: 1.5rem;
       color: $color_text;
@@ -60,29 +61,12 @@
 
   @media (max-width: 930px) {
     .newTask{
-      max-width: 25rem;
       min-height: 2.5rem;
-      margin: 2rem 1rem 0 2rem;
+      margin: 2rem 2rem 0 2rem;
 
       & input{
-        max-width: 25rem;
         min-height: 2.5rem;
       }
-
-    }
-  }
-
-  @media (max-width: 820px) {
-    .newTask{
-      max-width: 20rem;
-
-    }
-
-  }
-
-  @media (max-width: 500px) {
-    .newTask {
-      max-width: 18rem;
     }
   }
 

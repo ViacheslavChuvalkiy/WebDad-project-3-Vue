@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="!isEmpty">
-      <div :class="$style.listItem" v-for="(task) in toDoList" :key="task.id">
+      <div :class="$style.listItem" v-for="(task) in listTasks" :key="task.id">
         <ToDoTask :ToDoTask = "task" />
         <p>{{task.text}}</p>
         <button :class="$style.btn" @click="deleteItem(task.id)"></button>
@@ -14,25 +14,36 @@
 </template>
 
 <script>
+
   import ToDoTask from "./ToDoTask";
+  import {mapGetters,mapActions} from 'vuex';
+
   export default {
-    props: {
-      toDoList: {
-        type: Object,
-        default: () => ({})
-      }
-    },
+
     components: {
-      ToDoTask,
+     ToDoTask,
     },
     computed: {
+      ...mapGetters("tasks",["listTasks"]),
+      ...mapGetters("filter",["getActiveFilter"]),
       isEmpty() {
-        return !Object.keys(this.toDoList).length;
+        return !Object.values(this.listTasks).length;
       }
     },
     methods: {
+      ...mapActions('tasks', ['delTask']),
       deleteItem(id) {
-        this.$emit("deleteItem", id);
+        this.delTask(id);
+      },
+      filteredTaskList() {
+
+        console.log(this.getActiveFilter)
+        if(this.getActiveFilter === 'all'){
+         return this.listTasks;
+        }
+        else{
+          return Object.values(this.listTasks).filter( item => {item.status === this.getActiveFilter})
+        }
       }
     }
   }
@@ -46,7 +57,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-width: 30rem;
     min-height: 3.1rem;
     margin: 0 2rem 2rem 2rem;
     text-align: center;
@@ -102,7 +112,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    max-width: 30rem;
     min-height: 3.1rem;
     margin: 0 auto 0.5rem auto;
     text-align: center;
@@ -117,14 +126,7 @@
 
   @media (max-width: 930px) {
     .listItem, .listEmpty{
-      min-width: 25rem;
       min-height: 2.5rem;
-    }
-  }
-
-  @media (max-width: 820px) {
-    .listItem, .listEmpty{
-      min-width: 20rem;
     }
   }
 
@@ -139,13 +141,6 @@
       & .btn:before {
         font-size: 0.8rem;
       }
-    }
-
-  }
-
-  @media (max-width: 500px) {
-    .listItem, .listEmpty{
-      min-width: 18rem;
     }
   }
 

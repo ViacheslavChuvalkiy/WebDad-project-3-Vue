@@ -2,7 +2,7 @@
   <label :class="$style.task">
     <input
             type="checkbox"
-            :checked="ToDoTask.status === 'done'"
+            :checked="ToDoTask.status === 'completed'"
             @change="changeStatus(ToDoTask.id)"
     >
     <span :class="$style.itemStatus"></span>
@@ -10,6 +10,9 @@
 </template>
 
 <script>
+
+  import {mapActions} from 'vuex';
+
   export default {
     props: {
       ToDoTask: {
@@ -18,8 +21,9 @@
       }
     },
     methods: {
+      ...mapActions('tasks', ['changeStatusTask']),
       changeStatus(id) {
-        this.$emit("changeStatus", id);
+        this.changeStatusTask(id);
       }
     }
   }

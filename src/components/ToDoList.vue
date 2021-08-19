@@ -5,106 +5,30 @@
       <h2> to do list</h2>
     </div>
     <div :class="$style.block">
-      <ToDolistItem :toDoList="taskFilter" @deleteItem="onDeleteItem" @changeStatus="onChangeStatus"/>
-      <ToDolistNewTask @addNewTask="onAddNewTask"/>
+      <ToDolistItem />
+      <ToDolistNewTask/>
     </div>
-    <ToDolistFooter :tasks="taskInfo" @selectOption="onSelectOptions"/>
+    <ToDolistFooter :selectOption = "onSelectOption"/>
   </div>
 </template>
 
 <script>
+
   import ToDolistItem from "./ToDolistItem";
   import ToDolistNewTask from "./ToDolistNewTask";
   import ToDolistFooter from "./ToDolistFooter";
 
   export default {
+
     components: {
       ToDolistItem,
       ToDolistNewTask,
       ToDolistFooter,
     },
     methods: {
-      onDeleteItem(id) {
-        this.$delete(this.todoList, id);
-      },
-      onChangeStatus(id) {
-        this.todoList[id].status = this.todoList[id].status === "done" ? "active" : "done";
-      },
-      onAddNewTask(value) {
-        let lastId = Number(Object.keys(this.todoList)[Object.keys(this.todoList).length - 1]);
+      onSelectOption(){
 
-        if (!lastId) {
-          lastId = 0;
-        }
-        const newTask = {
-          text: value,
-          status: 'active',
-          id: String(lastId + 1)
-        };
-
-        this.$set(this.todoList, newTask.id, newTask);
-      },
-      onSelectOptions(value) {
-        this.filter_status = value;
       }
-    },
-    data: () => ({
-      todoList: {
-        1: {
-          text: 'Task 1',
-          status: 'done',
-          id: '1'
-        },
-        2: {
-          text: 'Task 2',
-          status: 'active',
-          id: '2'
-        },
-        3: {
-          text: 'Task 3',
-          status: 'active',
-          id: '3'
-        }
-      },
-      filter_status: 'all'
-    }),
-    computed: {
-      taskInfo() {
-        return {
-          count: Object.values(this.todoList).reduce((acc) => acc + 1, 0),
-          active: Object.values(this.todoList).reduce((acc, item) => item.status === "done" ? acc + 1 : acc, 0)
-        }
-      },
-      taskFilter() {
-        let filterStatus = this.filter_status;
-        let newObj = {};
-
-        if (filterStatus === 'all') {
-          newObj = this.todoList;
-        }
-
-        for (let prop in this.todoList) {
-
-          let tempTask = this.todoList[prop];
-          let task_count = Object.keys(newObj).length;
-
-          switch (filterStatus) {
-
-            case "active":
-              if (tempTask.status === 'active') {
-                newObj[task_count + 1] = tempTask;
-              }
-              break;
-
-            case "completed":
-              if (tempTask.status === 'done') {
-                newObj[task_count + 1] = tempTask;
-              }
-              break;
-          }
-        }
-        return newObj;
-      },
     }
   }
 </script>
@@ -112,7 +36,7 @@
 <style lang="scss" module>
   @import 'src/assets/styles/vars.scss';
   .container {
-    max-width: 35rem;
+    min-width: 30rem;
     height: auto;
     margin: 0 auto;
     padding: 6rem 1rem 1rem 1rem;
@@ -131,7 +55,6 @@
     }
 
     .title {
-      max-width: 35rem;
       min-height: 3.1rem;
       text-align: center;
       background: $color_bg_brown;
@@ -204,14 +127,11 @@
 
   @media (max-width: 500px) {
     .container {
-      max-width: 21rem;
+      max-width: 20rem;
       .title {
-        max-width: 21rem;
         padding: 0;
       }
-
     }
   }
-
 
 </style>

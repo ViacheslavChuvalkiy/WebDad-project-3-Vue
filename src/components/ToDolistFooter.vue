@@ -1,24 +1,23 @@
 <template>
   <div :class="$style.footer">
     <div :class="$style.info">
-      <p>{{tasks.active}}/{{tasks.count}} left</p>
+      <p>{{countActiveTask}}/{{countTask}} left</p>
     </div>
     <ToDoFilterBlock @selectOption="onSelectFilter"/>
   </div>
 </template>
 
 <script>
+
   import ToDoFilterBlock from "./ToDoFilterBlock";
+  import {mapGetters} from 'vuex';
 
   export default {
     components: {
       ToDoFilterBlock
     },
-    props: {
-      tasks: {
-        type: Object,
-        default: () => ({})
-      },
+    computed: {
+      ...mapGetters("tasks", ["countTask", "countActiveTask"]),
     },
     methods: {
       onSelectFilter(status) {
@@ -35,7 +34,6 @@
   .footer {
     display: flex;
     justify-content: space-between;
-    max-width: 35rem;
     min-height: 3.1rem;
     padding: 0 2rem;
     font-size: 1.2rem;
@@ -56,7 +54,6 @@
 
   @media (max-width: 450px) {
     .footer {
-        max-width: 25rem;
         padding: 0 0.5rem;
     }
   }

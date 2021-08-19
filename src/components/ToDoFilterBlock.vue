@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.filter">
-    <div v-for="filter in filterItems" :key="filter.id">
+    <div v-for="filter in filterList" :key="filter.id">
       <ToDoFilter :filter="filter"/>
     </div>
   </div>
@@ -8,32 +8,16 @@
 
 <script>
   import ToDoFilter from  './ToDoFilter';
+  import {mapGetters} from 'vuex'
+
   export default {
-    data: () => ({
-      filterItems: {
-          1: {
-            value: 'all',
-            isChecked: 'true',
-            text: 'All',
-            id: '1'
-          },
-        2: {
-          value: 'active',
-          isChecked: 'false',
-          text: 'Active',
-          id: '2'
-        },
-        3: {
-          value: 'completed',
-          isChecked: 'false',
-          text: 'Completed',
-          id: '3'
-        }
-        }
-    }),
+    computed: {
+      ...mapGetters("filter", ["filterList"]),
+    },
     components: {
       ToDoFilter,
-    }
+    },
+
 
   }
 </script>
