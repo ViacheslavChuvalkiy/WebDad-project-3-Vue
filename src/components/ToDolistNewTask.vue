@@ -1,21 +1,20 @@
 <template>
   <div :class="$style.newTask">
     <input
-            type="text"
-            placeholder="Add a new task"
-            v-model="value"
-            @keypress.enter="addTask"
+       type="text"
+       placeholder="Add a new task"
+       v-model="value"
+       @keypress.enter="addTask"
     >
   </div>
 </template>
 
 <script>
-
   import {mapActions} from 'vuex'
 
   export default {
     data: () => ({
-        value: ''
+      value: ''
     }),
     methods: {
       ...mapActions('tasks', ['addNewTask']),
@@ -28,46 +27,39 @@
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/styles/vars.scss';
-
+  @import 'src/assets/style.scss';
   .newTask {
     min-height: 2.6rem;
-    margin: 2rem 2rem 0 2rem;
+    margin: 0 2rem;
     text-align: center;
     background: $color_bg_light_brown;
     border-radius: 10px;
     border: 2px dashed $color_bg_brown;
-
     & input {
       width: 99%;
-      min-height: 2.6rem;
+      padding: 0.5rem 0;
       margin: 0;
       font-size: 1.5rem;
       color: $color_text;
       border: none;
       background: transparent;
     }
-
     & input::placeholder {
       color: $color_bg_brown;
       font-size: 1.3rem;
       text-align: center;
     }
-
     & input:focus {
       outline: none;
     }
   }
-
   @media (max-width: 930px) {
-    .newTask{
+    .newTask {
       min-height: 2.5rem;
       margin: 2rem 2rem 0 2rem;
-
-      & input{
+      & input {
         min-height: 2.5rem;
       }
     }
   }
-
 </style>

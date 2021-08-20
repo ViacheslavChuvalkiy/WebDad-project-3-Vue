@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div :class="$style.wrapper">
     <template v-if="!isEmpty">
       <div :class="$style.listItem" v-for="(task) in listTasks" :key="task.id">
-        <ToDoTask :ToDoTask = "task" />
+        <ToDoTask :ToDoTask="task"/>
         <p>{{task.text}}</p>
         <button :class="$style.btn" @click="deleteItem(task.id)"></button>
       </div>
@@ -14,18 +14,16 @@
 </template>
 
 <script>
-
   import ToDoTask from "./ToDoTask";
-  import {mapGetters,mapActions} from 'vuex';
+  import {mapGetters, mapActions} from 'vuex';
 
   export default {
-
     components: {
-     ToDoTask,
+      ToDoTask,
     },
     computed: {
-      ...mapGetters("tasks",["listTasks"]),
-      ...mapGetters("filter",["getActiveFilter"]),
+      ...mapGetters("tasks", ["listTasks"]),
+      ...mapGetters("filter", ["getActiveFilter"]),
       isEmpty() {
         return !Object.values(this.listTasks).length;
       }
@@ -36,13 +34,13 @@
         this.delTask(id);
       },
       filteredTaskList() {
-
         console.log(this.getActiveFilter)
-        if(this.getActiveFilter === 'all'){
-         return this.listTasks;
-        }
-        else{
-          return Object.values(this.listTasks).filter( item => {item.status === this.getActiveFilter})
+        if (this.getActiveFilter === 'all') {
+          return this.listTasks;
+        } else {
+          return Object.values(this.listTasks).filter(item => {
+            item.status === this.getActiveFilter
+          })
         }
       }
     }
@@ -50,20 +48,21 @@
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/styles/vars.scss';
-
+  @import 'src/assets/style.scss';
+  .wrapper {
+    margin-bottom: 2rem;
+  }
   .listItem {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-height: 3.1rem;
+    padding: 0.5rem 0;
     margin: 0 2rem 2rem 2rem;
     text-align: center;
     border-radius: 10px;
     font-family: $ff-task;
     background: #FFDFBE;
-
     & p {
       text-align: left;
       flex: auto;
@@ -73,7 +72,6 @@
       font-size: 1.2rem;
       color: $color-text;
     }
-
     .btn {
       position: relative;
       width: 1.6rem;
@@ -85,7 +83,6 @@
       opacity: 0.8;
       cursor: pointer;
     }
-
     .btn:before {
       content: '\2715';
       top: 0;
@@ -94,54 +91,41 @@
       color: $color-text;
       opacity: 0.7;
     }
-
     .btn:hover {
       opacity: 1;
       color: $color-hover-text;
       border: 1px solid $color-hover-text;
     }
-
     .btn:hover:before {
       color: $color-hover-text;
       opacity: 1;
     }
   }
-
   .listEmpty {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-height: 3.1rem;
-    margin: 0 auto 0.5rem auto;
+    padding: 0.5rem 0;
+    margin: 0 2rem 2rem 2rem;
     text-align: center;
     font-family: $ff-task;
     color: $color-text;
     background: #FFDFBE;
-
     & h2 {
-      margin: 0 0 0 1rem;
+      margin: 0 0.5rem;
     }
   }
-
-  @media (max-width: 930px) {
-    .listItem, .listEmpty{
-      min-height: 2.5rem;
-    }
-  }
-
   @media (max-width: 660px) {
-
-    .listItem{
+    .listItem {
       & .btn {
         width: 1.3rem;
         height: 1.3rem;
       }
-
       & .btn:before {
         font-size: 0.8rem;
+        margin: 0 0 0 -0.1rem;
       }
     }
   }
-
 </style>

@@ -1,13 +1,18 @@
 <template>
   <div :class="$style.filter">
-    <div v-for="filter in filterList" :key="filter.id">
-      <ToDoFilter :filter="filter"/>
-    </div>
+    <ToDoFilter
+       v-for="filter in filterList"
+       :key="filter.id"
+       :filterValue="filter.value"
+       :filterText="filter.text"
+       :filterId="filter.id"
+       :filterChecked="filter.isChecked"
+    />
   </div>
 </template>
 
 <script>
-  import ToDoFilter from  './ToDoFilter';
+  import ToDoFilter from './ToDoFilter';
   import {mapGetters} from 'vuex'
 
   export default {
@@ -17,13 +22,10 @@
     components: {
       ToDoFilter,
     },
-
-
   }
 </script>
 
 <style lang="scss" module>
-
   .filter {
     display: flex;
     align-self: center;

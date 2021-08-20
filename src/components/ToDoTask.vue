@@ -1,16 +1,15 @@
 <template>
   <label :class="$style.task">
     <input
-            type="checkbox"
-            :checked="ToDoTask.status === 'completed'"
-            @change="changeStatus(ToDoTask.id)"
+       type="checkbox"
+       :checked="ToDoTask.isChecked"
+       @change="changeStatus(ToDoTask.id)"
     >
     <span :class="$style.itemStatus"></span>
   </label>
 </template>
 
 <script>
-
   import {mapActions} from 'vuex';
 
   export default {
@@ -30,14 +29,11 @@
 </script>
 
 <style lang="scss" module>
-
-  @import 'src/assets/styles/vars.scss';
-
+  @import 'src/assets/style.scss';
   .task {
     input {
       display: none;
     }
-
     .itemStatus {
       display: block;
       margin-left: 1rem;
@@ -47,11 +43,9 @@
       border: 1px solid $color_bg_brown;
       cursor: pointer;
     }
-
     & input:checked + span {
       background: #FEB567;
       position: relative;
-
       &:before {
         content: '\2713';
         display: block;
@@ -63,17 +57,13 @@
       }
     }
   }
-
   @media (max-width: 550px) {
-
     .task {
       .itemStatus {
         width: 1.2rem;
         height: 1.2rem;
       }
-
       & input:checked + span {
-
         &:before {
           font-size: 1rem;
           top: -15%;
@@ -81,6 +71,4 @@
       }
     }
   }
-
-
 </style>

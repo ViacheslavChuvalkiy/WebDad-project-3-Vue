@@ -5,36 +5,33 @@
       <h2> to do list</h2>
     </div>
     <div :class="$style.block">
-      <ToDolistItem />
+      <ToDolistItem/>
       <ToDolistNewTask/>
     </div>
-    <ToDolistFooter :selectOption = "onSelectOption"/>
+    <ToDolistFooter :selectOption="onSelectOption"/>
   </div>
 </template>
 
 <script>
-
   import ToDolistItem from "./ToDolistItem";
   import ToDolistNewTask from "./ToDolistNewTask";
   import ToDolistFooter from "./ToDolistFooter";
 
   export default {
-
     components: {
       ToDolistItem,
       ToDolistNewTask,
       ToDolistFooter,
     },
     methods: {
-      onSelectOption(){
-
+      onSelectOption() {
       }
     }
   }
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/styles/vars.scss';
+  @import 'src/assets/style.scss';
   .container {
     min-width: 30rem;
     height: auto;
@@ -43,7 +40,6 @@
     position: relative;
     font-family: $ff-main;
     z-index: 1;
-
     & img {
       position: absolute;
       width: 30rem;
@@ -53,31 +49,25 @@
       opacity: 0.8;
       z-index: -1;
     }
-
     .title {
-      min-height: 3.1rem;
       text-align: center;
       background: $color_bg_brown;
-
       h2 {
         color: $color-text;
         font-size: 1.2rem;
         font-weight: 600;
         margin: 0;
-        padding: 0.7rem 0;
+        padding: 1rem 0;
       }
     }
-
     .block {
       padding: 2rem 0;
       background: $color_white;
-
       & div :last-child {
         margin-bottom: 0;
       }
     }
   }
-
   @media (max-width: 1010px) {
     .container {
       & img {
@@ -86,7 +76,6 @@
       }
     }
   }
-
   @media (max-width: 820px) {
     .container {
       & img {
@@ -95,7 +84,6 @@
       }
     }
   }
-
   @media (max-width: 660px) {
     .container {
       max-width: 25rem;
@@ -106,7 +94,6 @@
       }
     }
   }
-
   @media (max-width: 600px) {
     .container {
       margin: 0 2rem 0 4rem;
@@ -115,7 +102,6 @@
       }
     }
   }
-
   @media (max-width: 580px) {
     .container {
       margin: 0 auto;
@@ -124,7 +110,6 @@
       }
     }
   }
-
   @media (max-width: 500px) {
     .container {
       max-width: 20rem;
@@ -133,5 +118,4 @@
       }
     }
   }
-
 </style>

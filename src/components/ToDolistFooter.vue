@@ -8,7 +8,6 @@
 </template>
 
 <script>
-
   import ToDoFilterBlock from "./ToDoFilterBlock";
   import {mapGetters} from 'vuex';
 
@@ -25,25 +24,20 @@
       }
     }
   }
-
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/styles/vars.scss';
-
+  @import 'src/assets/style.scss';
   .footer {
     display: flex;
     justify-content: space-between;
-    min-height: 3.1rem;
-    padding: 0 2rem;
+    padding: 1rem 2rem;
     font-size: 1.2rem;
     background: $color_bg_brown;
     color: $color-text;
-
     .info {
       display: flex;
       align-self: center;
-
       & p {
         padding: 0;
         margin: 0;
@@ -51,11 +45,4 @@
       }
     }
   }
-
-  @media (max-width: 450px) {
-    .footer {
-        padding: 0 0.5rem;
-    }
-  }
-
 </style>
