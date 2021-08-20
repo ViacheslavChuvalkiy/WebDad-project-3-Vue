@@ -25,7 +25,7 @@
       changeStatus(id) {
         this.changeStatusTask(id);
       },
-      deleteItem(id){
+      deleteItem(id) {
         this.delTask(id);
       },
     }

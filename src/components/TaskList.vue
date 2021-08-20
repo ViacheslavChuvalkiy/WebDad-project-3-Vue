@@ -37,7 +37,7 @@
   @import 'src/assets/style.scss';
   .wrapper {
     margin: 0 0 2rem 0;
-    & h2{
+    & h2 {
       text-align: center;
       color: $color-text;
       font-size: 1.2rem;

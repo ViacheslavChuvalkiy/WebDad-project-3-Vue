@@ -8,7 +8,7 @@
 
 <style lang="scss" module>
   @import 'src/assets/style.scss';
-  .title{
+  .title {
     text-align: center;
     background: $color_bg_brown;
     h2 {
@@ -20,7 +20,7 @@
     }
   }
   @media (max-width: 500px) {
-    .title{
+    .title {
       padding: 0;
     }
   }
