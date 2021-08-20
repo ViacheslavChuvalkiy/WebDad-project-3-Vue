@@ -1,31 +1,27 @@
 <template>
   <div :class="$style.container">
+    <Header/>
     <img src="@/assets/img/bg-note.png">
-    <div :class="$style.title">
-      <h2> to do list</h2>
+    <div :class="$style.wrapper">
+      <TaskList/>
+      <TaskInput/>
     </div>
-    <div :class="$style.block">
-      <ToDolistItem/>
-      <ToDolistNewTask/>
-    </div>
-    <ToDolistFooter :selectOption="onSelectOption"/>
+    <Footer/>
   </div>
 </template>
 
 <script>
-  import ToDolistItem from "./ToDolistItem";
-  import ToDolistNewTask from "./ToDolistNewTask";
-  import ToDolistFooter from "./ToDolistFooter";
+  import Header from "./Header.vue";
+  import TaskList from "./TaskList";
+  import TaskInput from "./TaskInput";
+  import Footer from "./Footer.vue";
 
   export default {
     components: {
-      ToDolistItem,
-      ToDolistNewTask,
-      ToDolistFooter,
-    },
-    methods: {
-      onSelectOption() {
-      }
+      Header,
+      TaskList,
+      TaskInput,
+      Footer
     }
   }
 </script>
@@ -49,18 +45,7 @@
       opacity: 0.8;
       z-index: -1;
     }
-    .title {
-      text-align: center;
-      background: $color_bg_brown;
-      h2 {
-        color: $color-text;
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin: 0;
-        padding: 1rem 0;
-      }
-    }
-    .block {
+    .wrapper {
       padding: 2rem 0;
       background: $color_white;
       & div :last-child {
@@ -113,9 +98,6 @@
   @media (max-width: 500px) {
     .container {
       max-width: 20rem;
-      .title {
-        padding: 0;
-      }
     }
   }
 </style>

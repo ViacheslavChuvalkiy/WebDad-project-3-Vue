@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.filter">
-    <ToDoFilter
+    <FilterBtn
        v-for="filter in filterList"
        :key="filter.id"
        :filterValue="filter.value"
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import ToDoFilter from './ToDoFilter';
+  import FilterBtn from './Filter';
   import {mapGetters} from 'vuex'
 
   export default {
@@ -20,7 +20,7 @@
       ...mapGetters("filter", ["filterList"]),
     },
     components: {
-      ToDoFilter,
+      FilterBtn,
     },
   }
 </script>

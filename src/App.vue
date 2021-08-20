@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <ToDolist/>
+    <Content />
   </div>
 </template>
 
 <script>
-  import ToDolist from "./components/ToDoList.vue";
+  import Content from "./components/Content.vue";
 
   export default {
     components: {
-      ToDolist,
+      Content
     },
   }
 </script>

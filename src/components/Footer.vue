@@ -3,17 +3,17 @@
     <div :class="$style.info">
       <p>{{countActiveTask}}/{{countTask}} left</p>
     </div>
-    <ToDoFilterBlock @selectOption="onSelectFilter"/>
+    <Filters @selectOption="onSelectFilter"/>
   </div>
 </template>
 
 <script>
-  import ToDoFilterBlock from "./ToDoFilterBlock";
+  import Filters from "./Filters";
   import {mapGetters} from 'vuex';
 
   export default {
     components: {
-      ToDoFilterBlock
+      Filters
     },
     computed: {
       ...mapGetters("tasks", ["countTask", "countActiveTask"]),

@@ -27,7 +27,7 @@ const tasksStore = {
     countTask: ({tasksList}) =>
       Object.values(tasksList).length,
     countActiveTask: ({tasksList}) =>
-      Object.values(tasksList).filter((item) => item.status === 'active').length
+      Object.values(tasksList).filter((item) => item.isChecked).length
   },
   mutations: {
     ADD_Task(state, task) {
@@ -58,7 +58,7 @@ const tasksStore = {
     },
     changeStatusTask({commit, state}, id) {
       let task = state.tasksList[id];
-      task.status = task.status === 'completed' ? 'active' : 'completed';
+      task.isChecked = !task.isChecked;
       commit('CHANGE_STATUS_Task', task);
     },
   }
