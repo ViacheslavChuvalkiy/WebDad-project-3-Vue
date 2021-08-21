@@ -19,6 +19,11 @@
     methods: {
       ...mapMutations(['addNewTask']),
       addTask() {
+
+        if(this.value === ''){
+          return
+        }
+
         this.addNewTask(this.value);
         this.value = '';
       }
