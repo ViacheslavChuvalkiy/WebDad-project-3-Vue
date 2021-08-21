@@ -16,7 +16,7 @@
       Filters
     },
     computed: {
-      ...mapGetters("tasks", ["countTask", "countActiveTask"]),
+      ...mapGetters(["countTask", "countActiveTask"]),
     },
     methods: {
       onSelectFilter(status) {

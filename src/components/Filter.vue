@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import {mapActions} from "vuex";
+  import {mapMutations} from "vuex";
 
   export default {
     props: {
@@ -22,9 +22,8 @@
       filterId: String,
     },
     methods: {
-      ...mapActions('filter', ['changeFilter', 'changeActiveFilter']),
+      ...mapMutations(['changeFilterStatus', 'changeActiveFilter']),
       changeFilter(id) {
-        this.changeFilter(id);
         this.changeActiveFilter(id);
       }
     }

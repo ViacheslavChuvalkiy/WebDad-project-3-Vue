@@ -24,10 +24,9 @@
       Task,
     },
     computed: {
-      ...mapGetters("tasks", ["listTasks"]),
-      ...mapGetters("filter", ["getActiveFilter"]),
+      ...mapGetters(["listTasks"]),
       isEmpty() {
-        return !Object.values(this.listTasks).length;
+        return !this.listTasks.length;
       }
     }
   }

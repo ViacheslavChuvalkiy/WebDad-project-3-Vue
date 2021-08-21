@@ -10,14 +10,14 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
+  import {mapMutations} from 'vuex'
 
   export default {
     data: () => ({
       value: ''
     }),
     methods: {
-      ...mapActions('tasks', ['addNewTask']),
+      ...mapMutations(['addNewTask']),
       addTask() {
         this.addNewTask(this.value);
         this.value = '';

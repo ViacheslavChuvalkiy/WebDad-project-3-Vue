@@ -13,11 +13,11 @@
 
 <script>
   import FilterBtn from './Filter';
-  import {mapGetters} from 'vuex'
+  import {mapGetters} from 'vuex';
 
   export default {
     computed: {
-      ...mapGetters("filter", ["filterList"]),
+      ...mapGetters(["filterList"]),
     },
     components: {
       FilterBtn,

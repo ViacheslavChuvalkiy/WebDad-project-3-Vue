@@ -6,13 +6,16 @@
        @change="changeStatus(TaskId)"
     >
     <span :class="$style.itemStatus"></span>
-    <p>{{TaskText}}</p>
-    <button :class="$style.btn" @click="deleteItem(TaskId)"></button>
+    <TaskInfo :Context="TaskText"/>
+    <Btn :TaskId="TaskId"/>
   </label>
+
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
+  import TaskInfo from './TaskInfo';
+  import Btn from './Button';
+  import {mapMutations} from 'vuex';
 
   export default {
     props: {
@@ -21,13 +24,14 @@
       TaskId: String,
     },
     methods: {
-      ...mapActions('tasks', ['changeStatusTask', 'delTask']),
+      ...mapMutations(['changeStatusTask']),
       changeStatus(id) {
         this.changeStatusTask(id);
       },
-      deleteItem(id) {
-        this.delTask(id);
-      },
+    },
+    components: {
+      TaskInfo,
+      Btn
     }
   }
 </script>
@@ -68,55 +72,6 @@
         top: -10%;
         left: 26%;
         color: $color_white;
-      }
-    }
-    & p {
-      text-align: left;
-      flex: auto;
-      word-break: break-all;
-      margin: 0.3rem 1rem;
-      font-weight: 400;
-      font-size: 1.2rem;
-      color: $color-text;
-    }
-    .btn {
-      position: relative;
-      width: 1.6rem;
-      height: 1.6rem;
-      margin-right: 1rem;
-      background: transparent;
-      color: $color-text;
-      border: 1px solid $color_bg_brown;
-      opacity: 0.8;
-      cursor: pointer;
-    }
-    .btn:before {
-      content: '\2715';
-      top: 0;
-      left: 0.3rem;
-      font-size: 1rem;
-      color: $color-text;
-      opacity: 0.7;
-    }
-    .btn:hover {
-      opacity: 1;
-      color: $color-hover-text;
-      border: 1px solid $color-hover-text;
-    }
-    .btn:hover:before {
-      color: $color-hover-text;
-      opacity: 1;
-    }
-  }
-  @media (max-width: 660px) {
-    .task {
-      & .btn {
-        width: 1.3rem;
-        height: 1.3rem;
-      }
-      & .btn:before {
-        font-size: 0.8rem;
-        margin: 0 0 0 -0.1rem;
       }
     }
   }
