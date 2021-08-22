@@ -17,10 +17,11 @@
       value: ''
     }),
     methods: {
-      ...mapMutations(['addNewTask']),
+      ...mapMutations(['addNewTask','saveDataLocalStorage']),
       addTask() {
         this.addNewTask(this.value);
         this.value = '';
+        this.saveDataLocalStorage();
       }
     }
   }

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { v4 as uuidv4 } from 'uuid';
 
 Vue.use(Vuex);
+
 export default new Vuex.Store({
   state: {
     tasksList: [
@@ -52,7 +53,7 @@ export default new Vuex.Store({
         case 'completed' :
           return tasksList.filter((item) => item.isChecked);
         default :
-          return tasksList;
+         return tasksList;
       }
     },
     countTask({tasksList}) {
@@ -90,6 +91,23 @@ export default new Vuex.Store({
         filter.value === value? {...filter, filter: true} : {...filter, filter: false}
       );
     },
+    saveDataLocalStorage({tasksList}){
+      localStorage.setItem('tasksList',JSON.stringify(tasksList));
+    },
+    getTasksFromLocalStorage(state){
+
+      if(localStorage.tasksList){
+        try {
+          state.tasksList =  JSON.parse(localStorage.getItem('tasksList'));
+        } catch(e) {
+          localStorage.removeItem('tasksList');
+        }
+        }
+      }
   },
-  actions: {}
+  actions: {
+    getFromLocalStorage(context) {
+      context.commit('getTasksFromLocalStorage');
+    }
+  }
 })
