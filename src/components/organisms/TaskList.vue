@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.wrapper">
+  <div :class="$style.content">
     <template v-if="!isEmpty">
       <Task
         v-for="task in listTasks"
@@ -34,7 +34,7 @@
 
 <style lang="scss" module>
   @import 'src/assets/style.scss';
-  .wrapper {
+  .content {
     margin: 0 0 2rem 0;
     & h2 {
       text-align: center;

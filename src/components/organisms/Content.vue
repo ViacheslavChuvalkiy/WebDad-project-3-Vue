@@ -29,7 +29,7 @@
 <style lang="scss" module>
   @import 'src/assets/style.scss';
   .container {
-    min-width: 30rem;
+    max-width: 35rem;
     height: auto;
     margin: 0 auto;
     padding: 6rem 1rem 1rem 1rem;
@@ -72,7 +72,6 @@
   @media (max-width: 660px) {
     .container {
       max-width: 25rem;
-      min-width: 0;
       margin: 0 auto;
       padding: 4rem 0.5rem;
       & img {

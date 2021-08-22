@@ -4,12 +4,12 @@
       <input
         type="checkbox"
         :checked="taskChecked"
-        @change="changeStatus()"
+        @change="changeStatus"
       >
       <span :class="$style.itemStatus"></span>
     </label>
     <p>{{taskText}}</p>
-    <button :class="$style.btn" @click="deleteItem()"></button>
+    <button :class="$style.btn" @click="deleteItem"></button>
   </div>
 </template>
 
@@ -41,7 +41,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-height: 2.5rem;
     padding: 0.5rem 0;
     margin: 0 2rem 2rem 2rem;
     text-align: center;
@@ -95,8 +94,9 @@
     }
     .btn:before {
       content: '\2715';
-      top: 0;
-      left: 0.3rem;
+      position: absolute;
+      top: 0.05rem;
+      left: 0.35rem;
       font-size: 1rem;
       color: $color-text;
       opacity: 0.7;
@@ -118,8 +118,8 @@
         height: 1.3rem;
       }
       .btn:before {
+        left: 0.25rem;
         font-size: 0.8rem;
-        margin: 0 0 0 -0.1rem;
       }
     }
   }

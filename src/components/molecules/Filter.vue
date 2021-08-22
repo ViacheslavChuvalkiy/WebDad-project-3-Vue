@@ -5,7 +5,7 @@
       name="filter"
       :value="filterValue"
       :checked="filterChecked"
-      @change="changeFilter()"
+      @change="changeFilter"
     >
     <span>{{filterText}}</span>
   </label>

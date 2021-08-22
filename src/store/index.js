@@ -67,15 +67,14 @@ export default new Vuex.Store({
   },
   mutations: {
     addNewTask(state, task) {
-      if (task === '') {
-        return
+      if (task) {
+        const newTask = {
+          text: task,
+          isChecked: false,
+          id: uuidv4(),
+        };
+        state.tasksList.push(newTask);
       }
-      const newTask = {
-        text: task,
-        isChecked: false,
-        id: uuidv4(),
-      };
-      state.tasksList.push(newTask);
     },
     deleteTask(state, id) {
       state.tasksList = state.tasksList.filter((task) => task.id !== id);

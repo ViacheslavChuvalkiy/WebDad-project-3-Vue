@@ -29,7 +29,6 @@
 <style lang="scss" module>
   @import 'src/assets/style.scss';
   .newTask {
-    min-height: 2.6rem;
     margin: 0 2rem;
     text-align: center;
     background: $color_bg_light_brown;
@@ -55,11 +54,7 @@
   }
   @media (max-width: 930px) {
     .newTask {
-      min-height: 2.5rem;
       margin: 2rem 2rem 0 2rem;
-      & input {
-        min-height: 2.5rem;
-      }
     }
   }
 </style>
