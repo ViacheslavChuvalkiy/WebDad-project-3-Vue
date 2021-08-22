@@ -72,6 +72,7 @@
   @media (max-width: 660px) {
     .container {
       max-width: 25rem;
+      min-width: 0;
       margin: 0 auto;
       padding: 4rem 0.5rem;
       & img {

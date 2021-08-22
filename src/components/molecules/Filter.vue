@@ -48,6 +48,8 @@
   @media (max-width: 500px) {
     .filterOption {
       padding: 0;
+      margin: 0;
+      font-size: 1rem;
     }
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.task">
-    <label >
+    <label>
       <input
         type="checkbox"
         :checked="taskChecked"
@@ -111,7 +111,6 @@
       opacity: 1;
     }
   }
-
   @media (max-width: 660px) {
     .task {
       .btn {

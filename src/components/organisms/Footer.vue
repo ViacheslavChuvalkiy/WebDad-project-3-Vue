@@ -45,4 +45,11 @@
       }
     }
   }
+  @media (max-width: 500px) {
+    .footer {
+      padding: 1rem 1rem;
+      font-size: 1rem;
+    }
+  }
+
 </style>
