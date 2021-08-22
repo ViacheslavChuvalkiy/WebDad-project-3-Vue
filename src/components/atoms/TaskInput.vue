@@ -1,10 +1,10 @@
 <template>
   <div :class="$style.newTask">
     <input
-       type="text"
-       placeholder="Add a new task"
-       v-model="value"
-       @keypress.enter="addTask"
+      type="text"
+      placeholder="Add a new task"
+      v-model="value"
+      @keypress.enter="addTask"
     >
   </div>
 </template>
@@ -19,11 +19,6 @@
     methods: {
       ...mapMutations(['addNewTask']),
       addTask() {
-
-        if(this.value === ''){
-          return
-        }
-
         this.addNewTask(this.value);
         this.value = '';
       }

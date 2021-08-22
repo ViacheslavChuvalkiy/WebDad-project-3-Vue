@@ -1,11 +1,11 @@
 <template>
   <label :class="$style.filterOption">
     <input
-       type="radio"
-       name="filter"
-       :value="filterValue"
-       :checked="filterChecked"
-       @change="changeFilter(filterId)"
+      type="radio"
+      name="filter"
+      :value="filterValue"
+      :checked="filterChecked"
+      @change="changeFilter()"
     >
     <span>{{filterText}}</span>
   </label>
@@ -18,13 +18,12 @@
     props: {
       filterValue: String,
       filterText: String,
-      filterChecked: Boolean,
-      filterId: String,
+      filterChecked: Boolean
     },
     methods: {
-      ...mapMutations(['changeFilterStatus', 'changeActiveFilter']),
-      changeFilter(id) {
-        this.changeActiveFilter(id);
+      ...mapMutations(['changeActiveFilter']),
+      changeFilter() {
+        this.changeActiveFilter(this.filterValue);
       }
     }
   }

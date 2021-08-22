@@ -13,7 +13,7 @@
 <script>
   import Header from "./Header.vue";
   import TaskList from "./TaskList";
-  import TaskInput from "./TaskInput";
+  import TaskInput from "../atoms/TaskInput";
   import Footer from "./Footer.vue";
 
   export default {

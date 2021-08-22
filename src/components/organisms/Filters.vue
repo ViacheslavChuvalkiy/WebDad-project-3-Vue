@@ -1,18 +1,17 @@
 <template>
   <div :class="$style.filter">
     <FilterBtn
-       v-for="filter in filterList"
-       :key="filter.id"
-       :filterValue="filter.value"
-       :filterText="filter.text"
-       :filterId="filter.id"
-       :filterChecked="filter.isChecked"
+      v-for="filter in filterList"
+      :key="filter.id"
+      :filterValue="filter.value"
+      :filterText="filter.text"
+      :filterChecked="filter.isChecked"
     />
   </div>
 </template>
 
 <script>
-  import FilterBtn from './Filter';
+  import FilterBtn from '../molecules/Filter';
   import {mapGetters} from 'vuex';
 
   export default {

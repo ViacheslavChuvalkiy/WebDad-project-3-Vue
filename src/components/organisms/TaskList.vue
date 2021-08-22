@@ -2,11 +2,11 @@
   <div :class="$style.wrapper">
     <template v-if="!isEmpty">
       <Task
-         v-for="task in listTasks"
-         :key="task.id"
-         :TaskChecked="task.isChecked"
-         :TaskId="task.id"
-         :TaskText="task.text"
+        v-for="task in listTasks"
+        :key="task.id"
+        :taskChecked="task.isChecked"
+        :taskId="task.id"
+        :taskText="task.text"
       />
     </template>
     <template v-else>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import Task from "./Task";
+  import Task from "../molecules/Task";
   import {mapGetters} from 'vuex';
 
   export default {

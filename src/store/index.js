@@ -1,25 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { v4 as uuidv4 } from 'uuid';
 
 Vue.use(Vuex);
-
 export default new Vuex.Store({
-  state:{
+  state: {
     tasksList: [
       {
         text: 'Task 1',
         isChecked: true,
-        id: '0'
+        id: uuidv4(),
       },
       {
         text: 'Task 2',
         isChecked: false,
-        id: '1'
+        id: uuidv4(),
       },
       {
         text: 'Task 3',
         isChecked: false,
-        id: '2'
+        id: uuidv4(),
       },
     ],
     filters: [
@@ -27,34 +27,34 @@ export default new Vuex.Store({
         text: 'All',
         value: 'all',
         isChecked: true,
-        id: '0'
+        id: uuidv4(),
       },
       {
         text: 'Active',
         value: 'active',
         isChecked: false,
-        id: '1'
+        id: uuidv4(),
       },
       {
         text: 'Completed',
         value: 'completed',
         isChecked: false,
-        id: '2'
+        id: uuidv4(),
       }
     ],
-    activeFilter : 'all'
+    activeFilter: 'all'
   },
-  getters:{
-    listTasks({tasksList,activeFilter}) {
+  getters: {
+    listTasks({tasksList, activeFilter}) {
       switch (activeFilter) {
         case 'active' :
-          return tasksList.filter((item) => !item.isChecked)
+          return tasksList.filter((item) => !item.isChecked);
         case 'completed' :
           return tasksList.filter((item) => item.isChecked);
         default :
           return tasksList;
       }
-    } ,
+    },
     countTask({tasksList}) {
       return tasksList.length;
     },
@@ -65,31 +65,32 @@ export default new Vuex.Store({
       return filters;
     }
   },
-  mutations:{
+  mutations: {
     addNewTask(state, task) {
-        let lastId = state.tasksList.length;
-        if (!lastId) {
-          lastId = 0;
-        }
-        const newTask = {
-          text: task,
-          isChecked: false,
-          id: String(lastId)
-        };
-
-       state.tasksList.push(newTask);
+      if (task === '') {
+        return
+      }
+      const newTask = {
+        text: task,
+        isChecked: false,
+        id: uuidv4(),
+      };
+      state.tasksList.push(newTask);
     },
     deleteTask(state, id) {
       state.tasksList = state.tasksList.filter((task) => task.id !== id);
     },
     changeStatusTask(state, id) {
       state.tasksList = state.tasksList.map((task) =>
-        task.id === id ? { ...task, isChecked: !task.isChecked } : task
+        task.id === id ? {...task, isChecked: !task.isChecked} : task
       );
     },
-    changeActiveFilter(state, id) {
-      state.activeFilter = state.filters[id].value;
+    changeActiveFilter(state, value) {
+      state.activeFilter = value;
+      state.filters = state.filters.map((filter) =>
+        filter.value === value? {...filter, filter: true} : {...filter, filter: false}
+      );
     },
   },
-  actions:{}
+  actions: {}
 })
