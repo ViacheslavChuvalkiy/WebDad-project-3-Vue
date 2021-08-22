@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import Filters from "./Filters";
+  import Filters from "@/components/organisms/Filters";
   import {mapGetters} from 'vuex';
 
   export default {
@@ -27,7 +27,7 @@
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/style.scss';
+  @import '@/assets/style.scss';
   .footer {
     display: flex;
     justify-content: space-between;

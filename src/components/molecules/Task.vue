@@ -23,19 +23,21 @@
       taskId: String,
     },
     methods: {
-      ...mapMutations(['changeStatusTask', 'deleteTask']),
+      ...mapMutations(['changeStatusTask', 'deleteTask', 'saveDataLocalStorage']),
       changeStatus() {
         this.changeStatusTask(this.taskId);
+        this.saveDataLocalStorage();
       },
       deleteItem() {
         this.deleteTask(this.taskId);
+        this.saveDataLocalStorage();
       },
     }
   }
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/style.scss';
+  @import '@/assets/style.scss';
   .task {
     display: flex;
     flex-direction: row;

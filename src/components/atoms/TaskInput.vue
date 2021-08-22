@@ -17,17 +17,18 @@
       value: ''
     }),
     methods: {
-      ...mapMutations(['addNewTask']),
+      ...mapMutations(['addNewTask', 'saveDataLocalStorage']),
       addTask() {
         this.addNewTask(this.value);
         this.value = '';
+        this.saveDataLocalStorage();
       }
     }
   }
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/style.scss';
+  @import '@/assets/style.scss';
   .newTask {
     margin: 0 2rem;
     text-align: center;

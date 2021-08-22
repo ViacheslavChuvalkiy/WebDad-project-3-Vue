@@ -52,13 +52,28 @@ export default new Vuex.Store({
         case 'completed' :
           return tasksList.filter((item) => item.isChecked);
         default :
-          return tasksList;
+          if(localStorage.tasksList){
+            try {
+              tasksList = JSON.parse(localStorage.getItem('tasksList'));
+            } catch(e) {
+              localStorage.removeItem('tasksList');
+            }
+
+            console.log(tasksList);
+            return tasksList;
+          }
+          else {
+            return tasksList;
+          }
+
       }
     },
     countTask({tasksList}) {
+      console.log(tasksList);
       return tasksList.length;
     },
     countActiveTask({tasksList}) {
+      console.log(tasksList);
       return tasksList.filter((item) => !item.isChecked).length;
     },
     filterList({filters}) {
@@ -90,6 +105,10 @@ export default new Vuex.Store({
         filter.value === value? {...filter, filter: true} : {...filter, filter: false}
       );
     },
+    saveDataLocalStorage({tasksList}){
+      console.log(tasksList);
+      localStorage.setItem('tasksList',JSON.stringify(tasksList));
+    }
   },
   actions: {}
 })

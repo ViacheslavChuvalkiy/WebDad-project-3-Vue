@@ -7,7 +7,7 @@
 <script></script>
 
 <style lang="scss" module>
-  @import 'src/assets/style.scss';
+  @import '@/assets/style.scss';
   .title {
     text-align: center;
     background: $color_bg_brown;

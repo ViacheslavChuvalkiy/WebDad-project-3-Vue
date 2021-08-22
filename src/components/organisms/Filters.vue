@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import FilterBtn from '../molecules/Filter';
+  import FilterBtn from '@/components/molecules/Filter';
   import {mapGetters} from 'vuex';
 
   export default {

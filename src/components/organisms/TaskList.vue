@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import Task from "../molecules/Task";
+  import Task from "@/components/molecules/Task";
   import {mapGetters} from 'vuex';
 
   export default {
@@ -33,7 +33,7 @@
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/style.scss';
+  @import '@/assets/style.scss';
   .content {
     margin: 0 0 2rem 0;
     & h2 {

@@ -11,10 +11,10 @@
 </template>
 
 <script>
-  import Header from "./Header.vue";
-  import TaskList from "./TaskList";
-  import TaskInput from "../atoms/TaskInput";
-  import Footer from "./Footer.vue";
+  import Header from "@/components/organisms/Header.vue";
+  import TaskList from "@/components/organisms/TaskList";
+  import TaskInput from "@/components/atoms/TaskInput";
+  import Footer from "@/components/organisms/Footer.vue";
 
   export default {
     components: {
@@ -27,7 +27,7 @@
 </script>
 
 <style lang="scss" module>
-  @import 'src/assets/style.scss';
+  @import '@/assets/style.scss';
   .container {
     max-width: 35rem;
     height: auto;
