@@ -1,15 +1,24 @@
 <template>
   <div id="app">
-    <Content />
+    <Content/>
   </div>
 </template>
 
 <script>
   import Content from "./components/organisms/Content.vue";
+  import {mapMutations} from 'vuex';
 
   export default {
     components: {
       Content
+    },
+    methods: {
+      ...mapMutations(['getTasksFromLocalStorage'])
+    },
+    mounted() {
+      if (localStorage.tasksList) {
+        this.getTasksFromLocalStorage();
+      }
     },
   }
 </script>

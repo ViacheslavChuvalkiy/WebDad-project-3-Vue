@@ -17,7 +17,7 @@
       value: ''
     }),
     methods: {
-      ...mapMutations(['addNewTask','saveDataLocalStorage']),
+      ...mapMutations(['addNewTask', 'saveDataLocalStorage']),
       addTask() {
         this.addNewTask(this.value);
         this.value = '';

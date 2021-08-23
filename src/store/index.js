@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 Vue.use(Vuex);
-
 export default new Vuex.Store({
   state: {
     tasksList: [
@@ -53,7 +52,7 @@ export default new Vuex.Store({
         case 'completed' :
           return tasksList.filter((item) => item.isChecked);
         default :
-         return tasksList;
+          return tasksList;
       }
     },
     countTask({tasksList}) {
@@ -88,26 +87,21 @@ export default new Vuex.Store({
     changeActiveFilter(state, value) {
       state.activeFilter = value;
       state.filters = state.filters.map((filter) =>
-        filter.value === value? {...filter, filter: true} : {...filter, filter: false}
+        filter.value === value ? {...filter, filter: true} : {...filter, filter: false}
       );
     },
-    saveDataLocalStorage({tasksList}){
-      localStorage.setItem('tasksList',JSON.stringify(tasksList));
+    saveDataLocalStorage({tasksList}) {
+      localStorage.setItem('tasksList', JSON.stringify(tasksList));
     },
-    getTasksFromLocalStorage(state){
-
-      if(localStorage.tasksList){
+    getTasksFromLocalStorage(state) {
+      if (localStorage.tasksList) {
         try {
-          state.tasksList =  JSON.parse(localStorage.getItem('tasksList'));
-        } catch(e) {
+          state.tasksList = JSON.parse(localStorage.getItem('tasksList'));
+        } catch (e) {
           localStorage.removeItem('tasksList');
         }
-        }
       }
-  },
-  actions: {
-    getFromLocalStorage(context) {
-      context.commit('getTasksFromLocalStorage');
     }
-  }
+  },
+  actions: {}
 })

@@ -23,9 +23,6 @@
     components: {
       Task,
     },
-    mounted() {
-      this.$store.dispatch('getFromLocalStorage');
-    },
     computed: {
       ...mapGetters(["listTasks"]),
       isEmpty() {

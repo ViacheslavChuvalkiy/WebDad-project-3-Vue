@@ -23,7 +23,7 @@
       taskId: String,
     },
     methods: {
-      ...mapMutations(['changeStatusTask', 'deleteTask','saveDataLocalStorage']),
+      ...mapMutations(['changeStatusTask', 'deleteTask', 'saveDataLocalStorage']),
       changeStatus() {
         this.changeStatusTask(this.taskId);
         this.saveDataLocalStorage();
