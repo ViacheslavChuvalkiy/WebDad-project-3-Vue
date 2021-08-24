@@ -18,7 +18,6 @@
 <script>
   import Task from "../molecules/Task";
   import {mapGetters} from 'vuex';
-
   export default {
     components: {
       Task,

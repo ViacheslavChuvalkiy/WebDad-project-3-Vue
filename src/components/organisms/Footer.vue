@@ -1,27 +1,37 @@
 <template>
   <div :class="$style.footer">
     <div :class="$style.info">
-      <p>{{countActiveTask}}/{{countTask}} left</p>
+      <p>{{Tittle}}</p>
     </div>
-    <Filters @selectOption="onSelectFilter"/>
+    <Filters/>
   </div>
 </template>
 
 <script>
   import Filters from "./Filters";
-  import {mapGetters} from 'vuex';
+  import {mapGetters, mapMutations} from 'vuex';
 
   export default {
     components: {
       Filters
     },
-    computed: {
-      ...mapGetters(["countTask", "countActiveTask"]),
-    },
     methods: {
-      onSelectFilter(status) {
-        this.$emit("selectOption", status);
+      ...mapMutations(['countFilteredTask'])
+    },
+    computed: {
+      ...mapGetters(["countTask", "countActiveTask", 'countCompletedTask', 'getActiveFilter']),
+      Tittle() {
+        let tittle = '';
+        if (this.getActiveFilter === "completed") {
+          tittle = this.countCompletedTask + ' / ' + this.countTask + ' completed';
+        } else {
+          tittle = this.countActiveTask + ' / ' + this.countTask + ' left';
+        }
+        return tittle;
       }
+    },
+    mounted() {
+      this.countFilteredTask();
     }
   }
 </script>

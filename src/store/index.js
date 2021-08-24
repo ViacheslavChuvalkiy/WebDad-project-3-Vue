@@ -42,15 +42,19 @@ export default new Vuex.Store({
         id: uuidv4(),
       }
     ],
-    activeFilter: 'all'
+    activeFilter: 'all',
+    activeTask: 0,
+    completedTask: 0,
   },
   getters: {
     listTasks({tasksList, activeFilter}) {
       switch (activeFilter) {
         case 'active' :
-          return tasksList.filter((item) => !item.isChecked);
+          tasksList = tasksList.filter((item) => !item.isChecked);
+          return tasksList;
         case 'completed' :
-          return tasksList.filter((item) => item.isChecked);
+          tasksList = tasksList.filter((item) => item.isChecked);
+          return tasksList;
         default :
           return tasksList;
       }
@@ -58,11 +62,17 @@ export default new Vuex.Store({
     countTask({tasksList}) {
       return tasksList.length;
     },
-    countActiveTask({tasksList}) {
-      return tasksList.filter((item) => !item.isChecked).length;
+    countActiveTask({activeTask}) {
+      return activeTask;
+    },
+    countCompletedTask({completedTask}) {
+      return completedTask;
     },
     filterList({filters}) {
       return filters;
+    },
+    getActiveFilter({activeFilter}) {
+      return activeFilter;
     }
   },
   mutations: {
@@ -101,6 +111,10 @@ export default new Vuex.Store({
           localStorage.removeItem('tasksList');
         }
       }
+    },
+    countFilteredTask(state) {
+      state.activeTask = state.tasksList.filter(task => !task.isChecked).length;
+      state.completedTask = state.tasksList.filter(task => task.isChecked).length;
     }
   },
   actions: {}

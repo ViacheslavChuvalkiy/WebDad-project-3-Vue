@@ -21,10 +21,11 @@
       filterChecked: Boolean
     },
     methods: {
-      ...mapMutations(['changeActiveFilter']),
+      ...mapMutations(['changeActiveFilter', 'countFilteredTask']),
       changeFilter() {
         this.changeActiveFilter(this.filterValue);
-      }
+        this.countFilteredTask();
+      },
     }
   }
 </script>

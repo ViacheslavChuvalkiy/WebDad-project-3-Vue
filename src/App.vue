@@ -13,11 +13,12 @@
       Content
     },
     methods: {
-      ...mapMutations(['getTasksFromLocalStorage'])
+      ...mapMutations(['getTasksFromLocalStorage', 'countFilteredTask'])
     },
     mounted() {
       if (localStorage.tasksList) {
         this.getTasksFromLocalStorage();
+        this.countFilteredTask();
       }
     },
   }
