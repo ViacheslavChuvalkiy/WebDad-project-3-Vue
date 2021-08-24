@@ -43,8 +43,6 @@ export default new Vuex.Store({
       }
     ],
     activeFilter: 'all',
-    activeTask: 0,
-    completedTask: 0,
   },
   getters: {
     listTasks({tasksList, activeFilter}) {
@@ -62,11 +60,11 @@ export default new Vuex.Store({
     countTask({tasksList}) {
       return tasksList.length;
     },
-    countActiveTask({activeTask}) {
-      return activeTask;
+    countActiveTask({tasksList}) {
+      return tasksList.filter(task => !task.isChecked).length;
     },
-    countCompletedTask({completedTask}) {
-      return completedTask;
+    countCompletedTask({tasksList}) {
+      return tasksList.filter(task => task.isChecked).length;
     },
     filterList({filters}) {
       return filters;
@@ -111,10 +109,6 @@ export default new Vuex.Store({
           localStorage.removeItem('tasksList');
         }
       }
-    },
-    countFilteredTask(state) {
-      state.activeTask = state.tasksList.filter(task => !task.isChecked).length;
-      state.completedTask = state.tasksList.filter(task => task.isChecked).length;
     }
   },
   actions: {}

@@ -21,10 +21,9 @@
       filterChecked: Boolean
     },
     methods: {
-      ...mapMutations(['changeActiveFilter', 'countFilteredTask']),
+      ...mapMutations(['changeActiveFilter']),
       changeFilter() {
         this.changeActiveFilter(this.filterValue);
-        this.countFilteredTask();
       },
     }
   }

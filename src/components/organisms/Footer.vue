@@ -9,14 +9,11 @@
 
 <script>
   import Filters from "./Filters";
-  import {mapGetters, mapMutations} from 'vuex';
+  import {mapGetters} from 'vuex';
 
   export default {
     components: {
       Filters
-    },
-    methods: {
-      ...mapMutations(['countFilteredTask'])
     },
     computed: {
       ...mapGetters(["countTask", "countActiveTask", 'countCompletedTask', 'getActiveFilter']),
@@ -29,9 +26,6 @@
         }
         return tittle;
       }
-    },
-    mounted() {
-      this.countFilteredTask();
     }
   }
 </script>
